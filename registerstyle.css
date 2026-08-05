@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: url('images/tulips.jpeg');
+    background-size: cover;
+    height: 100vh;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.register-card{
+    width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #fdf0f5;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    color: #ea7ea3;
+}
+
+.register-card h2{
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ea7ea3;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group{
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+form input[type="text"], input[type="password"], input[type="email"]{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #f6bfd3;
+    border-radius: 5px;
+}
+
+form label{
+    align-self: flex-start;
+    font-weight: bold;
+}
+
+form button{
+    width: 50%;
+    max-width: 320px;
+    padding: 10px;
+    background-color: #f6bfd3;
+    border: none;
+    border-radius: 5px;
+    color: #ea7ea3;
+}
+
+form p{
+    text-align: center;
+    margin-top: 10px;
+}
+
+form a{
+    color: #ea7ea3;
+    text-decoration: underline;
+}
+
+button:hover{
+    background-color: #ea7ea3;
+    color: #fdf0f5;
+    border: 1px solid #f6bfd3;
+    cursor: pointer;
+}
