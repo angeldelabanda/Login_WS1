@@ -79,6 +79,5 @@ form a{
 button:hover{
     background-color: #ea7ea3;
     color: #fdf0f5;
-    border: 1px solid #f6bfd3;
     cursor: pointer;
 }
