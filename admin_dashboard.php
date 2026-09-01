@@ -34,16 +34,10 @@ $registration_result = $conn->query(
 
 $registration_count = $registration_result->fetch_assoc()['total'];
 
-// Determine which dashboard section is being viewed
 $section = $_GET['section'] ?? 'dashboard';
 
 $error = "";
 $success = "";
-
-
-// =========================
-// REMOVE EVENT
-// =========================
 
 if (
     $_SERVER["REQUEST_METHOD"] === "POST" &&
@@ -69,11 +63,6 @@ if (
         $stmt->close();
     }
 }
-
-
-// =========================
-// ADD EVENT
-// =========================
 
 if (
     $_SERVER["REQUEST_METHOD"] === "POST" &&
@@ -170,10 +159,7 @@ if (
 
             </div>
 
-
             <nav class="sidebar-nav">
-
-                <!-- Dashboard -->
 
                 <a
                     href="admin_dashboard.php"
@@ -183,9 +169,6 @@ if (
                     <span>Dashboard</span>
                 </a>
 
-
-                <!-- Add Event -->
-
                 <a
                     href="admin_dashboard.php?section=add-event"
                     class="sidebar-link <?php echo $section === 'add-event' ? 'active' : ''; ?>"
@@ -194,9 +177,6 @@ if (
                     <span>Add Event</span>
                 </a>
 
-
-                <!-- Manage Events -->
-
                 <a
                     href="admin_dashboard.php?section=events"
                     class="sidebar-link <?php echo $section === 'events' ? 'active' : ''; ?>"
@@ -204,9 +184,6 @@ if (
                     <span class="icon">📝</span>
                     <span>Manage Events</span>
                 </a>
-
-
-                <!-- Manage Users -->
 
                 <a
                     href="admin_dashboard.php?section=users"
@@ -217,9 +194,6 @@ if (
                 </a>
 
             </nav>
-
-
-            <!-- Logout -->
 
             <div class="sidebar-bottom">
 
@@ -235,14 +209,7 @@ if (
 
         </aside>
 
-
-        <!-- =========================
-             MAIN CONTENT
-             ========================= -->
-
         <main class="main-content">
-
-            <!-- Top Bar -->
 
             <div class="top-bar">
 
@@ -268,11 +235,6 @@ if (
                 </div>
 
             </div>
-
-
-            <!-- =========================
-                 ADD EVENT
-                 ========================= -->
 
             <?php if ($section === 'add-event'): ?>
 
@@ -305,9 +267,6 @@ if (
                             value="1"
                         >
 
-
-                        <!-- Event Title -->
-
                         <div class="form-group">
 
                             <label for="title">
@@ -324,9 +283,6 @@ if (
 
                         </div>
 
-
-                        <!-- Description -->
-
                         <div class="form-group">
 
                             <label for="description">
@@ -341,9 +297,6 @@ if (
                             ></textarea>
 
                         </div>
-
-
-                        <!-- Category -->
 
                         <div class="form-group">
 
@@ -389,9 +342,6 @@ if (
 
                         </div>
 
-
-                        <!-- Date and Location -->
-
                         <div class="form-row">
 
                             <div class="form-group">
@@ -428,9 +378,6 @@ if (
 
                         </div>
 
-
-                        <!-- Time -->
-
                         <div class="form-row">
 
                             <div class="form-group">
@@ -466,9 +413,6 @@ if (
 
                         </div>
 
-
-                        <!-- Organizer -->
-
                         <div class="form-group">
 
                             <label for="organizer">
@@ -485,9 +429,6 @@ if (
 
                         </div>
 
-
-                        <!-- Submit -->
-
                         <button
                             type="submit"
                             class="submit-button"
@@ -498,11 +439,6 @@ if (
                     </form>
 
                 </section>
-
-
-            <!-- =========================
-                 MANAGE EVENTS
-                 ========================= -->
 
             <?php elseif ($section === 'events'): ?>
 
@@ -550,8 +486,6 @@ if (
 
                 <section class="events-card">
 
-                    <!-- Success Message -->
-
                     <?php if (!empty($success)): ?>
 
                         <div class="message success">
@@ -559,9 +493,6 @@ if (
                         </div>
 
                     <?php endif; ?>
-
-
-                    <!-- Error Message -->
 
                     <?php if (!empty($error)): ?>
 
@@ -604,8 +535,6 @@ if (
 
                                         <tr>
 
-                                            <!-- Event -->
-
                                             <td>
 
                                                 <strong>
@@ -626,9 +555,6 @@ if (
 
                                             </td>
 
-
-                                            <!-- Category -->
-
                                             <td>
 
                                                 <span class="category-badge">
@@ -641,9 +567,6 @@ if (
 
                                             </td>
 
-
-                                            <!-- Date -->
-
                                             <td>
                                                 <?php
                                                 echo htmlspecialchars(
@@ -652,9 +575,6 @@ if (
                                                 ?>
                                             </td>
 
-
-                                            <!-- Time -->
-
                                             <td>
                                                 <?php
                                                 echo htmlspecialchars(
@@ -662,17 +582,12 @@ if (
                                                 );
                                                 ?>
 
-                                                -
-
                                                 <?php
                                                 echo htmlspecialchars(
                                                     $event['end_time']
                                                 );
                                                 ?>
                                             </td>
-
-
-                                            <!-- Location -->
 
                                             <td>
                                                 <?php
@@ -682,9 +597,6 @@ if (
                                                 ?>
                                             </td>
 
-
-                                            <!-- Organizer -->
-
                                             <td>
                                                 <?php
                                                 echo htmlspecialchars(
@@ -692,9 +604,6 @@ if (
                                                 );
                                                 ?>
                                             </td>
-
-
-                                            <!-- Remove -->
 
                                             <td>
 
@@ -766,11 +675,6 @@ if (
                     <?php endif; ?>
 
                 </section>
-
-
-            <!-- =========================
-     MANAGE USERS
-     ========================= -->
 
 <?php elseif ($section === 'users'): ?>
 
@@ -849,8 +753,6 @@ if (
 
                             <tr>
 
-                                <!-- ID -->
-
                                 <td>
                                     <?php
                                     echo htmlspecialchars(
@@ -858,9 +760,6 @@ if (
                                     );
                                     ?>
                                 </td>
-
-
-                                <!-- Username -->
 
                                 <td>
 
@@ -874,9 +773,6 @@ if (
 
                                 </td>
 
-
-                                <!-- Email -->
-
                                 <td>
                                     <?php
                                     echo htmlspecialchars(
@@ -884,9 +780,6 @@ if (
                                     );
                                     ?>
                                 </td>
-
-
-                                <!-- Role -->
 
                                 <td>
 
@@ -899,9 +792,6 @@ if (
                                     </span>
 
                                 </td>
-
-
-                                <!-- Action -->
 
                                 <td>
 
@@ -948,19 +838,11 @@ if (
 
     </section>
 
-
-<!-- =========================
-     DASHBOARD
-     ========================= -->
-
 <?php elseif ($section === 'dashboard'): ?>
 
                 <p class="subtitle">
                     Manage campus events and student activities from here.
                 </p>
-
-
-                <!-- Statistics -->
 
                 <section class="stats">
 
@@ -1027,9 +909,6 @@ if (
                     </div>
 
                 </section>
-
-
-                <!-- Welcome Card -->
 
                 <section class="welcome-card">
 

@@ -1,45 +1,88 @@
 <?php
+
 $host = "localhost";
 $user = "root";
 $password = "";
 $database = "campus_hub";
 
-$conn = new mysqli($host, $user, $password);
+$conn = new mysqli(
+    $host,
+    $user,
+    $password
+);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$conn->query("CREATE DATABASE IF NOT EXISTS `$database`");
+$conn->query(
+    "CREATE DATABASE IF NOT EXISTS `$database`"
+);
+
 $conn->select_db($database);
 
 $conn->query("
     CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
+
         username VARCHAR(50) NOT NULL UNIQUE,
+
         email VARCHAR(100) NOT NULL UNIQUE,
+
         password VARCHAR(255) NOT NULL,
-        role VARCHAR(20) NOT NULL DEFAULT 'customer',
+
+        role VARCHAR(20) NOT NULL DEFAULT 'student',
+
+        status VARCHAR(20) NOT NULL DEFAULT 'visible',
+
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
 ");
 
 $columns = [];
-$result = $conn->query("SHOW COLUMNS FROM users");
+
+$result = $conn->query(
+    "SHOW COLUMNS FROM users"
+);
 
 while ($row = $result->fetch_assoc()) {
     $columns[] = $row['Field'];
 }
 
 if (!in_array('email', $columns)) {
-    $conn->query("ALTER TABLE users ADD email VARCHAR(100) NULL UNIQUE AFTER username");
+
+    $conn->query(
+        "ALTER TABLE users
+         ADD email VARCHAR(100) NULL UNIQUE
+         AFTER username"
+    );
 }
 
 if (!in_array('role', $columns)) {
-    $conn->query("ALTER TABLE users ADD role VARCHAR(20) NOT NULL DEFAULT 'customer' AFTER password");
+
+    $conn->query(
+        "ALTER TABLE users
+         ADD role VARCHAR(20) NOT NULL DEFAULT 'student'
+         AFTER password"
+    );
+}
+
+if (!in_array('status', $columns)) {
+
+    $conn->query(
+        "ALTER TABLE users
+         ADD status VARCHAR(20) NOT NULL DEFAULT 'visible'
+         AFTER role"
+    );
 }
 
 if (!in_array('created_at', $columns)) {
-    $conn->query("ALTER TABLE users ADD created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP AFTER role");
+
+    $conn->query(
+        "ALTER TABLE users
+         ADD created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+         AFTER status"
+    );
 }
+
 ?>

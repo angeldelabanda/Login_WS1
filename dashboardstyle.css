@@ -11,20 +11,10 @@ body {
     color: #5f3d48;
 }
 
-
-/* =========================
-   ADMIN LAYOUT
-   ========================= */
-
 .admin-layout {
     display: flex;
     min-height: 100vh;
 }
-
-
-/* =========================
-   SIDEBAR
-   ========================= */
 
 .sidebar {
     width: 250px;
@@ -325,11 +315,6 @@ h1 {
     margin-bottom: 25px;
 }
 
-
-/* =========================
-   FORM
-   ========================= */
-
 .form-group {
     margin-bottom: 18px;
 }
@@ -419,11 +404,6 @@ h1 {
     background-color: #c96582;
 }
 
-
-/* =========================
-   MESSAGES
-   ========================= */
-
 .message {
     padding: 12px;
 
@@ -445,11 +425,6 @@ h1 {
 
     color: #39704a;
 }
-
-
-/* =========================
-   MANAGE EVENTS
-   ========================= */
 
 .section-header {
     display: flex;
@@ -479,11 +454,6 @@ h1 {
 
     overflow-x: auto;
 }
-
-
-/* =========================
-   EVENTS TABLE
-   ========================= */
 
 .event-table {
     width: 100%;
@@ -542,11 +512,6 @@ h1 {
     line-height: 1.4;
 }
 
-
-/* =========================
-   CATEGORY BADGE
-   ========================= */
-
 .category-badge {
     display: inline-block;
 
@@ -562,11 +527,6 @@ h1 {
 
     font-weight: bold;
 }
-
-
-/* =========================
-   REMOVE BUTTON
-   ========================= */
 
 .remove-button {
     border: none;
@@ -592,11 +552,6 @@ h1 {
 .remove-button:hover {
     background-color: #d9829d;
 }
-
-
-/* =========================
-   EMPTY STATE
-   ========================= */
 
 .empty-state {
     text-align: center;
@@ -624,11 +579,6 @@ h1 {
 
     margin-bottom: 20px;
 }
-
-
-/* =========================
-   RESPONSIVE
-   ========================= */
 
 @media (max-width: 800px) {
 
@@ -719,10 +669,6 @@ h1 {
     }
 
 }
-
-/* =========================
-   MANAGE USERS
-   ========================= */
 
 .users-card {
     background-color: white;
