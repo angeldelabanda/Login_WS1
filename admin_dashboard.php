@@ -882,7 +882,7 @@ if (
 
         <button
             type="submit"
-            class="quick-button"
+            class="submit-button"
         >
             Create Handler
         </button>
