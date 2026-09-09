@@ -126,6 +126,125 @@ if (
         $stmt->close();
     }
 }
+if (
+    $_SERVER["REQUEST_METHOD"] === "POST" &&
+    isset($_POST['create_handler'])
+) {
+    $username = trim($_POST['handler_username'] ?? '');
+    $email = trim($_POST['handler_email'] ?? '');
+    $password = $_POST['handler_password'] ?? '';
+
+    if (
+        empty($username) ||
+        empty($email) ||
+        empty($password)
+    ) {
+        $error = "Please fill in all handler account fields.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Please enter a valid email address.";
+    } elseif (strlen($password) < 6) {
+        $error = "Password must be at least 6 characters.";
+    } else {
+
+        $check = $conn->prepare(
+            "SELECT id
+             FROM users
+             WHERE username = ? OR email = ?"
+        );
+
+        $check->bind_param(
+            "ss",
+            $username,
+            $email
+        );
+
+        $check->execute();
+
+        $result = $check->get_result();
+
+        if ($result->num_rows > 0) {
+
+            $error = "Username or email is already registered.";
+
+        } else {
+
+            $hashedPassword = password_hash(
+                $password,
+                PASSWORD_DEFAULT
+            );
+
+            $role = "handler";
+
+            $stmt = $conn->prepare(
+                "INSERT INTO users
+                (username, email, password, role)
+                VALUES (?, ?, ?, ?)"
+            );
+
+            $stmt->bind_param(
+                "ssss",
+                $username,
+                $email,
+                $hashedPassword,
+                $role
+            );
+
+            if ($stmt->execute()) {
+
+                $success = "Handler account created successfully! 🌸";
+                $section = "users";
+
+            } else {
+
+                $error = "Unable to create handler account.";
+            }
+
+            $stmt->close();
+        }
+
+        $check->close();
+    }
+}
+
+if (
+    $_SERVER["REQUEST_METHOD"] === "POST" &&
+    isset($_POST['delete_handler'])
+) {
+
+    $handler_id = intval($_POST['handler_id'] ?? 0);
+
+    if ($handler_id > 0) {
+
+        $stmt = $conn->prepare(
+            "DELETE FROM users
+             WHERE id = ?
+             AND role = 'handler'"
+        );
+
+        $stmt->bind_param(
+            "i",
+            $handler_id
+        );
+
+        if ($stmt->execute()) {
+
+            $success = "Handler account deleted successfully. 🌸";
+            $section = "users";
+
+        } else {
+
+            $error = "Unable to delete handler account.";
+
+        }
+
+        $stmt->close();
+
+    } else {
+
+        $error = "Invalid handler account.";
+
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -685,17 +804,103 @@ if (
          WHERE role = 'student'
          ORDER BY id DESC"
     );
+
+    $handlers_result = $conn->query(
+    "SELECT id, username, email, role
+     FROM users
+     WHERE role = 'handler'
+     ORDER BY id DESC"
+);
     ?>
 
+    <section class="content-card">
+
+    <h2>📝 Create Handler Account</h2>
+
+    <p class="section-description">
+        Create an account for a staff member who can manage campus events.
+    </p>
+
+    <form
+        method="POST"
+        action="admin_dashboard.php?section=users"
+    >
+
+        <input
+            type="hidden"
+            name="create_handler"
+            value="1"
+        >
+
+        <div class="form-group">
+
+            <label for="handler_username">
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="handler_username"
+                name="handler_username"
+                placeholder="Enter handler username"
+                required
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="handler_email">
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="handler_email"
+                name="handler_email"
+                placeholder="Enter handler email"
+                required
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="handler_password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="handler_password"
+                name="handler_password"
+                placeholder="Enter handler password"
+                required
+            >
+
+        </div>
+
+        <button
+            type="submit"
+            class="quick-button"
+        >
+            Create Handler
+        </button>
+
+    </form>
+
+</section>
+
+    <section class="users-card">
 
     <div class="section-header">
 
         <div>
 
-            <h2>👥 Manage Users</h2>
+            <h2>🧑‍💼 Handler Accounts</h2>
 
             <p class="section-description">
-                View and manage registered student accounts.
+                View and manage the handler accounts created by the admin.
             </p>
 
         </div>
@@ -703,7 +908,155 @@ if (
     </div>
 
 
-    <section class="users-card">
+    <?php if (
+        $handlers_result &&
+        $handlers_result->num_rows > 0
+    ): ?>
+
+        <div class="user-table-container">
+
+            <table class="user-table">
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <?php while (
+                        $handler = $handlers_result->fetch_assoc()
+                    ): ?>
+
+                        <tr>
+
+                            <td>
+                                <?php
+                                echo htmlspecialchars(
+                                    $handler['id']
+                                );
+                                ?>
+                            </td>
+
+                            <td>
+
+                                <strong>
+                                    <?php
+                                    echo htmlspecialchars(
+                                        $handler['username']
+                                    );
+                                    ?>
+                                </strong>
+
+                            </td>
+
+                            <td>
+                                <?php
+                                echo htmlspecialchars(
+                                    $handler['email']
+                                );
+                                ?>
+                            </td>
+
+                            <td>
+
+                                <span class="role-badge">
+                                    <?php
+                                    echo htmlspecialchars(
+                                        $handler['role']
+                                    );
+                                    ?>
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <form
+                                    method="POST"
+                                    action="admin_dashboard.php?section=users"
+                                    onsubmit="return confirm('Delete this handler account?');"
+                                >
+
+                                    <input
+                                        type="hidden"
+                                        name="delete_handler"
+                                        value="1"
+                                    >
+
+                                    <input
+                                        type="hidden"
+                                        name="handler_id"
+                                        value="<?php echo $handler['id']; ?>"
+                                    >
+
+                                    <button
+                                        type="submit"
+                                        class="remove-button"
+                                    >
+                                        Delete
+                                    </button>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                    <?php endwhile; ?>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    <?php else: ?>
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                🧑‍💼
+            </div>
+
+            <h3>
+                No Handlers Yet
+            </h3>
+
+            <p>
+                There are currently no handler accounts.
+            </p>
+
+        </div>
+
+    <?php endif; ?>
+
+</section>
+
+<div class="section-header">
+
+    <div>
+
+        <h2>👥 Manage Users</h2>
+
+        <p class="section-description">
+            View and manage registered student accounts.
+        </p>
+
+    </div>
+
+</div>
+
+
+<section class="users-card">
 
         <?php if (!empty($success)): ?>
 

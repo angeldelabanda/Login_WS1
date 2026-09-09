@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $error = "Username or email is already registered.";
         } else {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $role = "customer";
+            $role = "student";
             $stmt = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("ssss", $username, $email, $hashedPassword, $role);
 

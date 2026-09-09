@@ -24,12 +24,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['username'] = $row['username'];
             $_SESSION['role'] = $row['role'];
             if ($row['role'] === 'admin') {
-             header("Location: admin_dashboard.php");
-                } else {
-                    header("Location: dashboard.php");
+                header("Location: admin_dashboard.php");
+            } elseif ($row['role'] === 'handler') {
+                header("Location: handler_dashboard.php");
+            } else {
+                header("Location: dashboard.php");
             }
-            
-            exit();
+
+        exit();
         } else {
             $error = "Invalid username or password.";
         }
