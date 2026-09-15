@@ -197,6 +197,8 @@ if (
     }
 }
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -267,9 +269,90 @@ if (
 
             <?php endif; ?>
 
-            <?php if ($section === 'dashboard'): ?>
+    <?php if ($section === 'dashboard'): ?>
 
-                <h1>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>! 🌸</h1>
+    <?php
+    $event_result = $conn->query(
+        "SELECT COUNT(*) AS total
+         FROM events
+         WHERE status = 'visible'"
+    );
+
+    $event_count = $event_result->fetch_assoc()['total'];
+
+    $upcoming_result = $conn->query(
+        "SELECT COUNT(*) AS total
+         FROM events
+         WHERE status = 'visible'
+         AND event_date >= CURDATE()"
+    );
+
+    $upcoming_count = $upcoming_result->fetch_assoc()['total'];
+    ?>
+
+    <div class="top-bar">
+
+        <div>
+
+            <p class="welcome-small">
+                Welcome back! 🌸
+            </p>
+
+            <h1>
+                Handler Dashboard
+            </h1>
+
+        </div>
+
+        <div class="admin-profile">
+
+            🧑‍💼
+
+            <span>
+                <?php echo htmlspecialchars($_SESSION['username']); ?>
+            </span>
+
+        </div>
+
+    </div>
+
+    <p class="subtitle">
+        Manage campus events and keep student activities updated.
+    </p>
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📅
+            </div>
+
+            <div>
+
+                <h3>
+                    Visible Events
+                </h3>
+
+                <p>
+                    <?php echo $event_count; ?>
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🌷
+            </div>
+
+            <div>
+
+                <h3>
+                    Upcoming Events
+                </h3>
 
                 <p>
                     Welcome to the Campus Hub Handler Dashboard.
@@ -284,24 +367,24 @@ if (
 
                     <form method="POST" action="handler_dashboard.php?section=add_event">
 
-        <div class="form-group">
+                <div class="form-group">
 
-            <label for="title">
-                Event Title
-            </label>
+                    <label for="title">
+                        Event Title
+                    </label>
 
-            <input
-                type="text"
-                id="title"
-                name="title"
-                placeholder="Enter event title"
-                required
-            >
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="Enter event title"
+                        required
+                    >
 
-        </div>
+                    </div>
 
 
-        <div class="form-group">
+            <div class="form-group">
 
             <label for="description">
                 Description

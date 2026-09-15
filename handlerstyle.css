@@ -263,8 +263,6 @@ h1 {
     background-color: #c96582;
 }
 
-/* CONTENT CARD */
-
 .content-card {
     background-color: white;
     padding: 30px;
@@ -282,8 +280,6 @@ h1 {
     color: #80606a;
     margin-bottom: 25px;
 }
-
-/* FORM */
 
 .form-group {
     margin-bottom: 18px;
@@ -344,8 +340,6 @@ h1 {
     background-color: #c96582;
 }
 
-/* MESSAGES */
-
 .message {
     padding: 12px;
     border-radius: 10px;
@@ -362,8 +356,6 @@ h1 {
     color: #39704a;
 }
 
-/* SECTION HEADER */
-
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -375,8 +367,6 @@ h1 {
     color: #d05f7c;
     margin-bottom: 6px;
 }
-
-/* EVENTS */
 
 .events-card {
     background-color: white;
@@ -434,6 +424,13 @@ h1 {
     font-weight: bold;
 }
 
+.event-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
 .edit-button {
     display: inline-block;
     background-color: #d97692;
@@ -451,8 +448,6 @@ h1 {
     background-color: #c96582;
 }
 
-/* REMOVE BUTTON */
-
 .remove-button {
     border: none;
     background-color: #e8a0b5;
@@ -468,8 +463,6 @@ h1 {
 .remove-button:hover {
     background-color: #d9829d;
 }
-
-/* EMPTY STATE */
 
 .empty-state {
     text-align: center;
@@ -490,8 +483,6 @@ h1 {
     color: #80606a;
     margin-bottom: 20px;
 }
-
-/* RESPONSIVE */
 
 @media (max-width: 800px) {
     .sidebar {
