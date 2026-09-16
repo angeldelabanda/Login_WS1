@@ -77,6 +77,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p>Don't have an account? <a href="register.php">Sign Up</a>.</p>
         </form>
     </div>
+    <div class="demo-accounts">
+    <h3>Demo Accounts</h3>
+    <p class="demo-note">Temporary credentials for checking the system:</p>
+
+    <div class="account-card">
+        <strong>Admin Account</strong>
+        <p>Username: admin</p>
+        <p>Password: admin123</p>
+    </div>
+
+    <div class="account-card">
+        <strong>Handler Account</strong>
+        <p>Username: handler1</p>
+        <p>Password: handler12345</p>
+        <p>You can also create an account on Admin Dashboard.</p>
+    </div>
+
+    <div class="account-card">
+        <strong>Student Account</strong>
+        <p>Username: gela</p>
+        <p>Password: 123456</p>
+    </div>
+</div>
     </section>
 </body>
 </html>

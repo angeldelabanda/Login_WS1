@@ -25,6 +25,49 @@ body{
     margin-bottom: 20px;
     color: #ea7ea3;
 }
+.demo-accounts {
+    width: 100%;
+    max-width: 420px;
+    margin: 25px auto 0;
+    padding: 20px;
+    background: #fff5f8;
+    border: 1px solid #f3bfd0;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #704654;
+}
+
+.demo-accounts h3 {
+    margin: 0 0 8px;
+    text-align: center;
+    color: #d05f7c;
+    font-size: 22px;
+}
+
+.demo-note {
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 13px;
+    color: #8b6874;
+}
+
+.account-card {
+    margin-top: 12px;
+    padding: 12px 15px;
+    background: #ffffff;
+    border-left: 5px solid #d97692;
+    border-radius: 9px;
+}
+
+.account-card strong {
+    color: #d05f7c;
+    font-size: 16px;
+}
+
+.account-card p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
 
 form{
     display: flex;

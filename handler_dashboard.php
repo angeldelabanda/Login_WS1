@@ -354,10 +354,6 @@ if (
                     Upcoming Events
                 </h3>
 
-                <p>
-                    Welcome to the Campus Hub Handler Dashboard.
-                </p>
-
 
             <?php elseif ($section === 'add_event'): ?>
 
