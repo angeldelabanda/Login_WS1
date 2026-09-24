@@ -91,7 +91,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <strong>Handler Account</strong>
         <p>Username: handler1</p>
         <p>Password: handler12345</p>
-        <p>You can also create an account on Admin Dashboard.</p>
     </div>
 
     <div class="account-card">
