@@ -37,9 +37,11 @@ CREATE TABLE IF NOT EXISTS events (
 
     organizer VARCHAR(100) NOT NULL,
 
-    status VARCHAR(20) NOT NULL DEFAULT 'visible',
+    image VARCHAR(255) NULL,
 
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    status VARCHAR(20) NOT NULL DEFAULT 'visible'
 );
 
 CREATE TABLE IF NOT EXISTS registrations (

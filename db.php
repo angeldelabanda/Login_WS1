@@ -85,4 +85,69 @@ if (!in_array('created_at', $columns)) {
     );
 }
 
+$conn->query("
+    CREATE TABLE IF NOT EXISTS events (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+
+        title VARCHAR(150) NOT NULL,
+
+        description TEXT NOT NULL,
+
+        category VARCHAR(50) NOT NULL,
+
+        event_date DATE NOT NULL,
+
+        start_time TIME NOT NULL,
+
+        end_time TIME NOT NULL,
+
+        location VARCHAR(150) NOT NULL,
+
+        organizer VARCHAR(100) NOT NULL,
+
+        image VARCHAR(255) NULL,
+
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+        status VARCHAR(20) NOT NULL DEFAULT 'visible'
+    )
+");
+
+$eventColumns = [];
+
+$eventResult = $conn->query(
+    "SHOW COLUMNS FROM events"
+);
+
+while ($row = $eventResult->fetch_assoc()) {
+    $eventColumns[] = $row['Field'];
+}
+
+if (!in_array('image', $eventColumns)) {
+
+    $conn->query(
+        "ALTER TABLE events
+         ADD image VARCHAR(255) NULL
+         AFTER organizer"
+    );
+}
+
+if (!in_array('created_at', $eventColumns)) {
+
+    $conn->query(
+        "ALTER TABLE events
+         ADD created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+         AFTER image"
+    );
+}
+
+if (!in_array('status', $eventColumns)) {
+
+    $conn->query(
+        "ALTER TABLE events
+         ADD status VARCHAR(20) NOT NULL DEFAULT 'visible'
+         AFTER created_at"
+    );
+}
+
 ?>

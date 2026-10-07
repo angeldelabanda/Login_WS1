@@ -13,10 +13,11 @@ body {
 .admin-layout {
     display: flex;
     min-height: 100vh;
+    width: 100vw;
 }
 
 .sidebar {
-    width: 250px;
+    width: 260px;
     min-height: 100vh;
     background-color: #f6bfd3;
     display: flex;
@@ -78,5 +79,62 @@ body {
 
 .logout-link {
     color: #9d5269;
+}
+
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #5f3d48;
+    
+}
+
+h4 {
+    font-size: 16px;
+    color: #8b5968;
+    margin-bottom: 30px;
+}
+
+.card-container {
+    display: flex;
+    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card {
+    background-color: #f9d9e4;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.event-container {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    width: 100%;
+}
+
+.event-card {
+    background-color: #f9d9e4;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%;
 }
 
